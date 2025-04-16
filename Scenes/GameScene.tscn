@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://bji8j3wn4dhih"]
+
+[ext_resource type="Shader" uid="uid://cxli72gck48m7" path="res://Scenes/SkyShader.gdshader" id="2_4bvgx"]
+[ext_resource type="PackedScene" uid="uid://ujgkhi4j5b5m" path="res://Scripts/Prefabs/Player.tscn" id="3_3mbwn"]
+[ext_resource type="PackedScene" uid="uid://c5ymix5ys7fh5" path="res://Scripts/Prefabs/TestCube.tscn" id="4_x6js8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3mbwn"]
+shader = ExtResource("2_4bvgx")
+
+[sub_resource type="Sky" id="Sky_jwv4s"]
+sky_material = SubResource("ShaderMaterial_3mbwn")
+
+[sub_resource type="Environment" id="Environment_lohlh"]
+background_mode = 2
+sky = SubResource("Sky_jwv4s")
+ambient_light_source = 3
+ambient_light_color = Color(0.803228, 0.851071, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0976868, -0.0506773, 0.191086)
+
+[node name="MainScene" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.25163, 0.25153, 19.1756)
+use_collision = true
+size = Vector3(23.6821, 0.230591, 41.5384)
+
+[node name="ItemTestCube" parent="MainScene" instance=ExtResource("4_x6js8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2819, 1.8794, -6.906)
+
+[node name="Player" parent="MainScene" instance=ExtResource("3_3mbwn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09765, 0.115295, 10.2262)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lohlh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.866024, -0.433016, 0.250001, 0, 0.499998, 0.866026, -0.500003, 0.749999, -0.43301, 0.0976868, 5.66147, 0.191086)
+light_energy = 1.551
+shadow_enabled = true

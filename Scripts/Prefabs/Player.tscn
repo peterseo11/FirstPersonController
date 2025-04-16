@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://ujgkhi4j5b5m"]
+
+[ext_resource type="Script" uid="uid://bvghia7y2nr2p" path="res://Scripts/Player/Player.gd" id="1_ily12"]
+[ext_resource type="Script" uid="uid://b6lapsxeptmag" path="res://Scripts/Player/Interaction/PlayerInteractionHandler.gd" id="2_uoqjr"]
+[ext_resource type="Script" uid="uid://hfxksyaea323" path="res://Scripts/Inventory/ItemData.gd" id="3_vap6i"]
+[ext_resource type="Texture2D" uid="uid://br21nsvfxd3lc" path="res://Textures/Diamond_JE3_BE3.webp" id="4_dk6mn"]
+[ext_resource type="PackedScene" uid="uid://c5ymix5ys7fh5" path="res://Scripts/Prefabs/TestCube.tscn" id="4_pfp0t"]
+[ext_resource type="Script" uid="uid://ccajcgueqi1vg" path="res://Scripts/Inventory/InventoryHandler.gd" id="6_n01qs"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_xc2g5"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wydro"]
+
+[sub_resource type="Resource" id="Resource_fvlll"]
+script = ExtResource("3_vap6i")
+ItemName = "TestCube"
+Icon = ExtResource("4_dk6mn")
+ItemModelPrefab = ExtResource("4_pfp0t")
+metadata/_custom_type_script = "uid://hfxksyaea323"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_45d1s"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_ily12")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_xc2g5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_wydro")
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67939, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="InteractionArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("2_uoqjr")
+ItemTypes = Array[ExtResource("3_vap6i")]([SubResource("Resource_fvlll")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+shape = SubResource("SphereShape3D_45d1s")
+
+[node name="InventoryUI" type="Control" parent="." node_paths=PackedStringArray("InventoryGrid")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+script = ExtResource("6_n01qs")
+InventoryGrid = NodePath("Panel/MarginContainer/GridContainer")
+
+[node name="Panel" type="Panel" parent="InventoryUI"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -388.5
+offset_top = -199.0
+offset_right = 388.5
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_force_pass_scroll_events = false
+
+[node name="MarginContainer" type="PanelContainer" parent="InventoryUI/Panel"]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_force_pass_scroll_events = false
+
+[node name="GridContainer" type="GridContainer" parent="InventoryUI/Panel/MarginContainer"]
+clip_contents = true
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 10
+
+[connection signal="OnItemPickedUp" from="InteractionArea" to="InventoryUI" method="PickupItem"]
+[connection signal="body_entered" from="InteractionArea" to="InteractionArea" method="OnObjectEnteredArea"]
+[connection signal="body_exited" from="InteractionArea" to="InteractionArea" method="OnObjectExitedArea"]

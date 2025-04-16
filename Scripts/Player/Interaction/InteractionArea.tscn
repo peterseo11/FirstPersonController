@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxt2g0xjqfadj"]
+
+[ext_resource type="Script" uid="uid://b6lapsxeptmag" path="res://Scripts/Player/Interaction/PlayerInteractionHandler.gd" id="1_sas3h"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_45d1s"]
+
+[node name="InteractionArea" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_sas3h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+shape = SubResource("SphereShape3D_45d1s")
+
+[connection signal="body_entered" from="." to="." method="OnObjectEnteredArea"]
+[connection signal="body_exited" from="." to="." method="OnObjectExitedArea"]

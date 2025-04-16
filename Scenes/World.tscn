@@ -1,10 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://db2h3t17k37pe"]
+[gd_scene load_steps=9 format=3 uid="uid://db2h3t17k37pe"]
 
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_1d73w"]
-[ext_resource type="Material" uid="uid://b4s0xnt1f6lia" path="res://Materials/Green.tres" id="1_o5nrg"]
-[ext_resource type="Material" uid="uid://bi1h4xe7msjwi" path="res://Materials/Pink.tres" id="3_irgfk"]
-[ext_resource type="Material" uid="uid://b122sws3pt7w7" path="res://Materials/Red.tres" id="4_nuwel"]
-[ext_resource type="Material" uid="uid://p2nkjd3ge3qm" path="res://Materials/Blue.tres" id="5_te4rd"]
+[ext_resource type="Material" uid="uid://b4s0xnt1f6lia" path="res://Textures/Green.tres" id="1_o5nrg"]
+[ext_resource type="Material" uid="uid://b122sws3pt7w7" path="res://Textures/Red.tres" id="4_nuwel"]
+[ext_resource type="PackedScene" uid="uid://ujgkhi4j5b5m" path="res://Scripts/Prefabs/Player.tscn" id="4_p70al"]
+[ext_resource type="Material" uid="uid://p2nkjd3ge3qm" path="res://Textures/Blue.tres" id="5_te4rd"]
+[ext_resource type="PackedScene" uid="uid://c5ymix5ys7fh5" path="res://Scripts/Prefabs/TestCube.tscn" id="7_y7y61"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5lq0h"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,37 +19,9 @@ sky = SubResource("Sky_f6bkd")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_xc2g5"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wydro"]
-
 [node name="World" type="Node3D"]
 
 [node name="Map" type="Node3D" parent="."]
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -29.5653)
-material_override = ExtResource("3_irgfk")
-use_collision = true
-size = Vector3(52.4636, 5.83948, 1)
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="Map"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 29.3824)
-use_collision = true
-size = Vector3(52.4636, 5.83948, 1)
-material = ExtResource("3_irgfk")
-
-[node name="CSGBox3D4" type="CSGBox3D" parent="Map"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 0, 0.382374)
-material_override = ExtResource("3_irgfk")
-use_collision = true
-size = Vector3(60, 5.83948, 1)
-
-[node name="CSGBox3D5" type="CSGBox3D" parent="Map"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 26, 0, 0.382374)
-material_override = ExtResource("3_irgfk")
-use_collision = true
-size = Vector3(60, 5.83948, 1)
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Map"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, -2, 0.382374)
@@ -58,18 +30,19 @@ use_collision = true
 size = Vector3(4, 5.83948, 4)
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Map"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 0, -5.61763)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12.0232, 0.0725393, -5.59704)
 material_override = ExtResource("5_te4rd")
 use_collision = true
 size = Vector3(4, 5.83948, 4)
 
 [node name="CSGBox3D8" type="CSGBox3D" parent="Map"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 12, 0, -12.6176)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 11.9539, 9.53674e-07, -12.5657)
 material_override = ExtResource("4_nuwel")
 use_collision = true
 size = Vector3(4, 8, 4)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.951425, -0.129706, -0.58848)
 material_override = ExtResource("1_o5nrg")
 use_collision = true
 size = Vector3(52.2363, 0.002, 59.575)
@@ -81,18 +54,11 @@ environment = SubResource("Environment_g2h84")
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" type="CharacterBody3D" parent="."]
-script = ExtResource("1_1d73w")
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
+transform = Transform3D(3.08317, 0, 0, 0, 3.08317, 0, 0, 0, 47.8009, -14.6266, 1.42087, -0.114066)
+size = Vector3(1, 1, 1.04541)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("CapsuleMesh_xc2g5")
+[node name="Player" parent="." instance=ExtResource("4_p70al")]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("CapsuleShape3D_wydro")
-
-[node name="Head" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.67939, 0)
-
-[node name="Camera3D" type="Camera3D" parent="Player/Head"]
+[node name="ItemTestCube" parent="." instance=ExtResource("7_y7y61")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.1373, 1.49443, 0)

@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dssodx2yhtou1"]
+
+[ext_resource type="Script" uid="uid://ckuxxxirdt3xc" path="res://Scripts/Inventory/InventorySlot.gd" id="1_i074i"]
+
+[node name="InventorySlot" type="Button" node_paths=PackedStringArray("IconSlot")]
+custom_minimum_size = Vector2(80, 80)
+offset_right = 100.0
+offset_bottom = 100.0
+size_flags_stretch_ratio = 5.73
+button_mask = 0
+icon_alignment = 1
+script = ExtResource("1_i074i")
+IconSlot = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 1
